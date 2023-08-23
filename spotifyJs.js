@@ -144,7 +144,9 @@ btn.addEventListener('click', () => {
         console.log(song.songname);
         if (info == song.songname) {
             audioElement.src = song.filePath;
+            bannerChange(songIndex);
             statusPlay();
+
             
         }
     }
