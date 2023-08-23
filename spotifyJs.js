@@ -139,13 +139,15 @@ backPlay.addEventListener('click', () => {
 })
 btn.addEventListener('click', () => {
     let info = inp.value;
-    console.log(info);
+    
     for (song of songs) {
-        console.log(song.songname);
+        
         if (info == song.songname) {
             audioElement.src = song.filePath;
-            bannerChange(songIndex);
+            songBanner.src = song.coverPath;
+            para.innerText = song.songname;
             statusPlay();
+            inp.value = "";
 
             
         }
