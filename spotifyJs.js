@@ -12,11 +12,11 @@ let btn = document.querySelector('.button');
 let songBanner = document.querySelector('#alubm');
 
 let songs = [
-    { songname: "Music 01", filePath: '1.mp3', coverPath: 'images/Cover01.webp' },
-    { songname: "Music 02", filePath: '2.mp3', coverPath: 'images/Cover02.webp' },
-    { songname: "Music 03", filePath: '3.mp3', coverPath: 'images/Cover03.jpeg' },
-    { songname: "Music 04", filePath: '4.mp3', coverPath: 'images/Cover04.jpeg' },
-    { songname: "Music 05", filePath: '5.mp3', coverPath: 'images/Cover05.jpeg' },
+    { songname: "Music 01", filePath: 'music/1.mp3', coverPath: 'images/Cover01.webp' },
+    { songname: "Music 02", filePath: 'music/2.mp3', coverPath: 'images/Cover02.webp' },
+    { songname: "Music 03", filePath: 'music/3.mp3', coverPath: 'images/Cover03.jpeg' },
+    { songname: "Music 04", filePath: 'music/4.mp3', coverPath: 'images/Cover04.jpeg' },
+    { songname: "Music 05", filePath: 'music/5.mp3', coverPath: 'images/Cover05.jpeg' },
 ];
 
 // Accessor
@@ -54,7 +54,7 @@ for (play of play_pause) {
 
         e.target.classList.remove('fa-play');
         e.target.classList.add('fa-pause');
-        audioElement.src = `${songIndex}.mp3`;
+        audioElement.src = `music/${songIndex}.mp3`;
         bannerChange(songIndex);
         audioElement.currentTime = 0;
         audioElement.play();
@@ -85,7 +85,7 @@ masterPlay.addEventListener('click', (e) => {
 
 // bannerChange
 const bannerChange = (songIndex)=>{
-    let val = (`${songIndex}.mp3`);
+    let val = (`music/${songIndex}.mp3`);
     for (m of songs){
         if(m.filePath == val){
             
@@ -100,7 +100,7 @@ forPlay.addEventListener('click', () => {
     } else {
         songIndex += 1;
     };
-    audioElement.src = `${songIndex}.mp3`;
+    audioElement.src = `music/${songIndex}.mp3`;
     bannerChange(songIndex);
     audioElement.currentTime = 0;
     audioElement.play();
@@ -115,7 +115,7 @@ backPlay.addEventListener('click', () => {
     } else {
         songIndex -= 1;
     };
-    audioElement.src = `${songIndex}.mp3`;
+    audioElement.src = `music/${songIndex}.mp3`;
     bannerChange(songIndex);
     audioElement.currentTime = 0;
     audioElement.play();
@@ -150,5 +150,28 @@ myProgressBar.addEventListener('change', () => {
 });
 
 
+// Adding a new Feature "Home Button"
+
+// initializing variables
+
+let homeFeature = document.querySelector('.home');
+let logo = document.querySelector('.brand');
+let account = document.querySelector('.account');
+let library = document.querySelector('.library');
+let accountData = document.querySelector('h4');
+let datas = document.querySelectorAll('h5');
+let rightSides = document.querySelector('.songBanner');
+let exit = document.querySelector('.exit');
+homeFeature.style.display = 'None';
+
+logo.addEventListener('click', ()=>{
+    homeFeature.style.display = 'block';
+    rightSides.classList.add('rightSides');
+
+})
+exit.addEventListener('click', ()=>{
+    homeFeature.style.display = 'None';
+    rightSides.classList.remove('rightSides');
+})
 
 
