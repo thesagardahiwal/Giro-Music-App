@@ -10,6 +10,8 @@ let songIndex = 1;
 let inp = document.querySelector('input');
 let btn = document.querySelector('.button');
 let songBanner = document.querySelector('#alubm');
+let para = document.querySelector('p');
+let head = document.querySelector('h3');
 
 let songs = [
     { songname: "Music 01", filePath: 'music/1.mp3', coverPath: 'images/Cover01.webp' },
@@ -43,6 +45,7 @@ const makeAllPause = (e) => {
     // Pause Function
 }
 
+
 // play list buttons function
 for (play of play_pause) {
     
@@ -57,9 +60,7 @@ for (play of play_pause) {
         audioElement.src = `music/${songIndex}.mp3`;
         bannerChange(songIndex);
         audioElement.currentTime = 0;
-        audioElement.play();
-        masterPlay.classList.remove('fa-play');
-        masterPlay.classList.add('fa-pause');
+        statusPlay();
 
 
 
@@ -69,16 +70,14 @@ for (play of play_pause) {
 masterPlay.addEventListener('click', (e) => {
     songIndex;
     if (audioElement.paused || audioElement.currentTime <= 0) {
-        audioElement.play();
+        statusPlay();
 
         bannerChange(songIndex);
-        masterPlay.classList.remove("fa-play");
-        masterPlay.classList.add("fa-pause");
+        
     } else {
-        audioElement.pause();
+        
         makeAllPlays(e);
-        masterPlay.classList.add("fa-play");
-        masterPlay.classList.remove("fa-pause");
+        statusStop();
     }
 })
 
@@ -90,9 +89,25 @@ const bannerChange = (songIndex)=>{
         if(m.filePath == val){
             
             songBanner.src = m.coverPath;
+            para.innerText = m.songname;
+
         }
     }
 }
+const statusPlay = ()=>{
+    audioElement.play();
+    head.innerText = "Playing..."
+    masterPlay.classList.remove('fa-play');
+    masterPlay.classList.add('fa-pause');
+
+}
+
+const statusStop =()=>{
+    audioElement.pause();
+    masterPlay.classList.add("fa-play");
+        masterPlay.classList.remove("fa-pause");
+}
+
 // forPlay
 forPlay.addEventListener('click', () => {
     if (songIndex >= 5) {
@@ -103,9 +118,8 @@ forPlay.addEventListener('click', () => {
     audioElement.src = `music/${songIndex}.mp3`;
     bannerChange(songIndex);
     audioElement.currentTime = 0;
-    audioElement.play();
-    masterPlay.classList.remove('fa-play');
-    masterPlay.classList.add('fa-pause');
+    statusPlay();
+    
     
 });
 // blackPlay 
@@ -118,9 +132,8 @@ backPlay.addEventListener('click', () => {
     audioElement.src = `music/${songIndex}.mp3`;
     bannerChange(songIndex);
     audioElement.currentTime = 0;
-    audioElement.play();
-    masterPlay.classList.remove('fa-play');
-    masterPlay.classList.add('fa-pause');
+    statusPlay();
+    
     
     
 })
@@ -131,19 +144,25 @@ btn.addEventListener('click', () => {
         console.log(song.songname);
         if (info == song.songname) {
             audioElement.src = song.filePath;
-            audioElement.play();
-            masterPlay.classList.remove('fa-play');
-            masterPlay.classList.add('fa-pause');
+            statusPlay();
+            
         }
     }
 })
 
 // myProgressBar
-audioElement.addEventListener("timeupdate", () => {
+audioElement.addEventListener("timeupdate", (e) => {
 
     let progress = parseInt((audioElement.currentTime / audioElement.duration) * 100);
-
+    songIndex;
     myProgressBar.value = progress;
+    if (myProgressBar.value == 100){
+        songIndex +=1;
+        audioElement.src = `music/${songIndex}.mp3`;
+        bannerChange(songIndex);
+        makeAllPlays(e);
+        statusPlay();
+    }
 });
 myProgressBar.addEventListener('change', () => {
     audioElement.currentTime = ((myProgressBar.value * audioElement.duration) / 100);

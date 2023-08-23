@@ -243,6 +243,10 @@ img:hover {
     width: 280px;
     transition: 1s;
 }
-.exit .data{
+.exit{
+    justify-content: center;
     padding: 20px;
+}
+p{
+    text-align: center;
 }
