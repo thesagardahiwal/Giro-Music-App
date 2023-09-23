@@ -1,3 +1,3 @@
-# Spotify-Clone
+# Giro Music App
 
-this is a Spotify-Clone 
+this is a Music App
