@@ -65,18 +65,37 @@ nav ul li {
     align-items: center;
     position: sticky;
 }
+.im{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    
 
+}
+.br-name{
+    margin-left: 10px;
+}
 .brand img {
-    height: 40px;
+    height: 90px;
     padding: 0 8px;
+    transition: 1s;
+    
+    
 }
 
 
 .brand {
+    height: 45px;
+    
     display: flex;
     align-items: center;
     font-size: 1.3rem;
     font-weight: bolder;
+    
 }
 
 #play {
